@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我想你了</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        .image-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .content {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        p {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-slider">
+        <img src="image1.jpg" alt="Image 1"> <!-- 替换 'image1.jpg' 为你的照片路径 -->
+        <img src="image2.jpg" alt="Image 2"> <!-- 替换 'image2.jpg' 为你的照片路径 -->
+        <img src="image3.jpg" alt="Image 3"> <!-- 替换 'image3.jpg' 为你的照片路径 -->
+        <img src="image4.jpg" alt="Image 4"> <!-- 替换 'image4.jpg' 为你的照片路径 -->
+        <img src="image5.jpg" alt="Image 5"> <!-- 替换 'image5.jpg' 为你的照片路径 -->
+    </div>
+    <div class="content" id="content">
+        <h1>想你啦我的哈密瓜</h1>
+        <p>你的声音最好听，你的味道最好闻，你笑起来的样子最好看，你陪着我的时候，我从没羡慕过任何人( •̀ ω •́ )✧。</p>
+    </div>
+    <button id="playButton" onclick="playAudio()">播放音乐</button>
+    <audio id="bgMusic" loop>
+        <source src="好想你.mp3" type="audio/mpeg"> <!-- 替换 'your-background-music.mp3' 为你提供的音乐路径 -->
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("bgMusic");
+            audio.play();
+            document.getElementById("playButton").style.display = 'none';
+        }
+
+        var images = document.querySelectorAll('.image-slider img');
+        var currentIndex = 0;
+        var content = document.getElementById('content');
+
+        function nextImage() {
+            images[currentIndex].style.display = 'none';
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].style.display = 'block';
+        }
+
+        setInterval(nextImage, 4000); // 4秒钟切换一张图片
+
+        // 显示第一张图片
+        images[currentIndex].style.display = 'block';
+
+        function toggleContent() {
+            content.style.display = 'block';
+            setTimeout(function() {
+                content.style.display = 'none';
+                setTimeout(toggleContent, 5000); // 5秒后重新显示内容
+            }, 15000); // 显示15秒后隐藏内容
+        }
+
+        toggleContent(); // 开始循环显示/隐藏内容
+    </script>
+</body>
+</html>
